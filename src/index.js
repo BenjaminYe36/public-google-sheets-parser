@@ -1,5 +1,6 @@
-const isBrowser = typeof window !== 'undefined' && typeof window.document !== 'undefined';
-const fetch = isBrowser ? /* istanbul ignore next */window.fetch : require('../src/fetch')
+const isBrowser = typeof window !== 'undefined' && typeof window.document !== 'undefined'
+// Only supports browser to make React webpack build easier
+const fetch = window.fetch
 
 class PublicGoogleSheetsParser {
   constructor (spreadsheetId, option) {
@@ -38,9 +39,7 @@ class PublicGoogleSheetsParser {
       const response = await fetch(url)
       return response && response.ok ? response.text() : null
     } catch (e) {
-      /* istanbul ignore next */
       console.error('Error fetching spreadsheet data:', e)
-      /* istanbul ignore next */
       return null
     }
   }
@@ -76,7 +75,6 @@ class PublicGoogleSheetsParser {
         rows = this.applyHeaderIntoRows(header, originalRows)
       }
     } catch (e) {
-      /* istanbul ignore next */
       console.error('Error parsing spreadsheet data:', e)
     }
 
@@ -97,7 +95,6 @@ class PublicGoogleSheetsParser {
   }
 }
 
-/* istanbul ignore next */
 if (isBrowser && typeof module === 'undefined') {
   window.PublicGoogleSheetsParser = PublicGoogleSheetsParser
 } else {

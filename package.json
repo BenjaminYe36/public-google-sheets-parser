@@ -3,11 +3,11 @@
   "version": "1.5.4",
   "description": "Get JSONArray from public google sheets with using only spreadsheetId",
   "scripts": {
-    "build:dist": "npx babel ./src/index.js --out-file ./dist/index.js",
-    "test": "node ./test",
+    "prepare": "npm run build",
+    "build": "npx babel ./src/index.js --out-file ./dist/index.js",
     "lint": "eslint --format ./node_modules/eslint-friendly-formatter --ext .js .",
     "lint:fix": "eslint --format ./node_modules/eslint-friendly-formatter --ext .js . --fix",
-    "coverage": "rimraf coverage && istanbul cover tape ./test/index.js"
+    "clean": "rmdir /s /q node_modules"
   },
   "main": "src/index.js",
   "unpkg": "dist/index.js",
@@ -30,17 +30,10 @@
     "url": "https://github.com/fureweb-com/public-google-sheets-parser.git"
   },
   "homepage": "https://github.com/fureweb-com/public-google-sheets-parser.git",
-  "dependencies": {},
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint && yarn test"
-    }
-  },
   "eslintIgnore": [
     "node_modules",
     "package",
-    "dist",
-    "coverage"
+    "dist"
   ],
   "devDependencies": {
     "@babel/cli": "^7.12.8",
@@ -52,11 +45,7 @@
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
-    "husky": "^4.3.0",
-    "istanbul": "^1.1.0-alpha.1",
-    "rimraf": "^3.0.2",
-    "standard": "^16.0.3",
-    "tape": "^5.0.1"
+    "standard": "^16.0.3"
   },
   "types": "@types/index.d.ts"
 }
